@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.json">
+<title>RAW DEF Calculator</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;background:#0b1020;color:#f8fafc;min-height:100vh}
+main{max-width:560px;margin:auto;padding:24px 16px 40px}.card{background:#151c2f;border:1px solid #26324d;border-radius:22px;padding:22px;box-shadow:0 15px 40px #0005}
+h1{margin:0;font-size:28px}.sub{color:#9ca9c3;margin:5px 0 22px}.grid{display:grid;gap:14px}.group{background:#0f172a;padding:16px;border-radius:16px}.group h2{font-size:16px;margin:0 0 12px}
+label{display:block;font-size:13px;color:#aab6ca;margin:10px 0 6px}input{width:100%;padding:13px 14px;border-radius:11px;border:1px solid #334155;background:#111827;color:#fff;font-size:18px;outline:none}input:focus{border-color:#7c3aed}
+button{width:100%;border:0;border-radius:12px;padding:14px;font-size:16px;font-weight:800;cursor:pointer;margin-top:14px}.calc{background:#7c3aed;color:white}.secondary{background:#26324d;color:white}.results{display:grid;gap:10px;margin-top:16px}.result{background:#101827;border-radius:14px;padding:15px}.result span{display:block;color:#9ca9c3;font-size:13px}.result b{font-size:25px}.formula{font-size:13px;color:#9ca9c3;margin-top:16px;line-height:1.5;text-align:center}.status{min-height:20px;color:#fca5a5;font-size:13px;margin-top:10px;text-align:center}
+</style>
+</head>
+<body><main><div class="card">
+<h1>🛡️ RAW DEF Calculator</h1><div class="sub">PDEF & MDEF • rápido e feito para celular</div>
+<div class="grid">
+<section class="group"><h2>🛡️ PDEF</h2>
+<label>RAW PDEF</label><input id="rp" inputmode="decimal" placeholder="Ex.: 3377">
+<label>% PDEF</label><input id="pp" inputmode="decimal" placeholder="Ex.: 28,16"></section>
+<section class="group"><h2>✨ MDEF</h2>
+<label>RAW MDEF</label><input id="rm" inputmode="decimal" placeholder="Ex.: 913">
+<label>% MDEF</label><input id="pm" inputmode="decimal" placeholder="Ex.: 16,16"></section>
+</div>
+<button class="calc" onclick="calc()">CALCULAR</button>
+<div class="status" id="err"></div>
+<div class="results"><div class="result"><span>PDEF FINAL</span><b id="pout">—</b></div><div class="result"><span>MDEF FINAL</span><b id="mout">—</b></div></div>
+<button class="secondary" onclick="copy()">📋 COPIAR RESULTADOS</button>
+<button class="secondary" onclick="clearAll()">↻ LIMPAR</button>
+<div class="formula">Fórmula: RAW ÷ (1 + % ÷ 100)<br>Ex.: 3377 ÷ (1 + 28,16 ÷ 100)</div>
+</div></main>
+<script>
+const ids=['rp','pp','rm','pm']; ids.forEach(id=>document.getElementById(id).addEventListener('input',calc));
+function n(v){return parseFloat(String(v).trim().replace(/\./g,'').replace(',','.'))}
+function f(v){return v.toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2})}
+function calc(){let rp=n(rpEl().value),pp=n(ppEl('pp').value),rm=n(rpEl('rm').value),pm=n(rpEl('pm').value);let e=document.getElementById('err');if([rp,pp,rm,pm].some(x=>!Number.isFinite(x))){e.textContent='';return}document.getElementById('pout').textContent=f(rp/(1+pp/100));document.getElementById('mout').textContent=f(rm/(1+pm/100));e.textContent=''}
+function rpEl(id='rp'){return document.getElementById(id)}
+function copy(){let p=document.getElementById('pout').textContent,m=document.getElementById('mout').textContent;if(p==='—'&&m==='—')return; navigator.clipboard?.writeText(`PDEF FINAL: ${p}\nMDEF FINAL: ${m}`);document.getElementById('err').style.color='#86efac';document.getElementById('err').textContent='Resultados copiados!';setTimeout(()=>document.getElementById('err').textContent='',1500)}
+function clearAll(){ids.forEach(id=>document.getElementById(id).value='');document.getElementById('pout').textContent='—';document.getElementById('mout').textContent='—';document.getElementById('err').textContent=''}
+if('serviceWorker'in navigator) navigator.serviceWorker.register('sw.js');
+</script></body></html>
