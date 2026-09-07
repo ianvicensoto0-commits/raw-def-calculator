@@ -1,0 +1,53 @@
+{
+  "id": "/raw-def-calculator/",
+  "name": "RAW DEF Calculator",
+  "short_name": "RAW DEF",
+  "description": "Calculadora de PDEF e MDEF baseada em valores RAW e porcentagens.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "/raw-def-calculator/",
+  "scope": "/raw-def-calculator/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0b1020",
+  "theme_color": "#111827",
+  "categories": [
+    "utilities",
+    "games"
+  ],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-1024.png",
+      "sizes": "1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/screenshot-1080x1920.png",
+      "sizes": "1080x1920",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Tela principal da RAW DEF Calculator"
+    }
+  ]
+}
